@@ -1,0 +1,6 @@
+flask
+peewee
+psycopg2
+Flask-RESTX
+Werkzeug
+gunicorn

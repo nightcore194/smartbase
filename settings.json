@@ -1,10 +1,10 @@
 {
-  "name": "smartbase",
-  "version": "1.0.0",
-  "dependencies": {
-  },
   "url": "",
   "header": "",
   "params": "",
-  "time": "5"
+  "schedule_time": "5",
+  "db_name": "",
+  "host": "",
+  "user": "",
+  "password": ""
 }

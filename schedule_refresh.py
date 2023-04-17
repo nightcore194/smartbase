@@ -7,7 +7,7 @@ with open('settings.json', 'r') as file:
     preference = json.load(file)
 
 def runup():
-    schedule.every(int(preference['time'])).seconds.do(cacheData.request_data())
+    schedule.every(int(preference['schedule_time'])).seconds.do(cacheData.request_data())
     while True:
         schedule.run_pending()
         time.sleep(1)
