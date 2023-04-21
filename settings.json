@@ -2,9 +2,17 @@
   "url": "",
   "header": "",
   "params": "",
-  "schedule_time": "5",
+  "schedule_period_query": "5",
+  "schedule_type": "daily",
+  "schedule_at_time": "",
+  "schedule_timing": "",
+  "schedule_period_time_type": "minutes",
   "db_name": "",
   "host": "",
   "user": "",
-  "password": ""
+  "password": "",
+  "path_index": "templates/index.html",
+  "path_data": "model/data_input_prediction/work.csv",
+  "path_selected_features": "model/selected_features.txt",
+  "model_path": "model/classifier.bin"
 }
