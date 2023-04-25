@@ -9,7 +9,7 @@ import numpy as np
 #import copy
 import datetime
 from catboost import CatBoostClassifier, Pool
-from work_functions import DataFromTxt
+from model.work_functions import DataFromTxt
 
 def RawData(Path_to_file):
     '''

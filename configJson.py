@@ -1,13 +1,18 @@
 """
-Получение данных из файла настроек в формате JSON
+Классы настроек в формате JSON
 """
 import json
 
+preference = json.load(open('settings.json', 'r'))
+
+# перегрузочные методы @property - автоматически сгенерированный метод для геттеров/сеттеров/делиттеров, запрос для получения данных делать к этому методу
+
+# Класс настроек для подключения к api
 class configURL():
     def __init__(self):
-        self.url = json.load(open('settings.json', 'r'))['url']
-        self.header = json.load(open('settings.json', 'r'))['header']
-        self.params = json.load(open('settings.json', 'r'))['params']
+        self.url = preference['req']['_url']  # url api, к которому подключаемся
+        self.header = preference['req']['_header'] # заголовка запроса, прописываются в виде словаря, в настройках - в виде обьекта json
+        self.params = preference['req']['_params'] # параметры запроса(тело), прописываются в виде словаря, в настройках - в виде обьекта json
 
     @property
     def url_value(self):
@@ -21,38 +26,23 @@ class configURL():
     def params_value(self):
         return self.params
 
+# Класс настроек для отложенного запуск скрипта, пока прописываю под библиотеку schedule
 class configScheduler():
     def __init__(self):
-        self.schedule_period_query = json.load(open('settings.json', 'r'))['schedule_period_query']
-        self.schedule_type = json.load(open('settings.json', 'r'))['schedule_type']
-        self.schedule_time = json.load(open('settings.json', 'r'))['schedule_timing']
-        self.schedule_at_time = json.load(open('settings.json', 'r'))['schedule_at_time']
-        self.schedule_period_time_type = json.load(open('settings.json', 'r'))['schedule_period_time_type']
+        self.schedule_period_query = preference['schedule']['_period_query'] # период опроса в указанном значении(в нашем случае в часах)
+
     @property
     def schedule_period_query_value(self):
         return self.schedule_period_query
 
-    @property
-    def schedule_type_value(self):
-        return self.schedule_type
 
-    @property
-    def schedule_time_value(self):
-        return self.schedule_time
-
-    @property
-    def schedule_at_time_value(self):
-        return self.schedule_period_query
-
-    @property
-    def schedule_period_time_type_value(self):
-        return self.schedule_period_time_type
+# Класс настроек для подключения к БД
 class configDB():
     def __init__(self):
-        self.db_name = json.load(open('settings.json', 'r'))['db_name']
-        self.host = json.load(open('settings.json', 'r'))['host']
-        self.user = json.load(open('settings.json', 'r'))['user']
-        self.password = json.load(open('settings.json', 'r'))['password']
+        self.db_name = preference['db']['_name'] # название бд
+        self.host = preference['db']['_host'] # хост, на котором располагается БД
+        self.user = preference['db']['_user'] # user, созданный внутри БД
+        self.password = preference['db']['_password'] # password, созданный внутри бд
 
     @property
     def db_name_value(self):
@@ -70,18 +60,20 @@ class configDB():
     def password_value(self):
         return self.password
 
+# Класс настроек для приложения Flask
 class configApp():
     def __init__(self):
-        self.path_index = json.load(open('settings.json', 'r'))['path_index']
+        self.path_index = preference['app']['_path_index'] # путь к папке, где располагаются html файлы
     @property
     def path_index_value(self):
         return self.path_index
 
+# Класс настроек для подключаемой модели
 class configModel():
     def __init__(self):
-        self.path_data = json.load(open('settings.json', 'r'))['path_data']
-        self.path_selected_feature = json.load(open('settings.json', 'r'))['path_selected_feature']
-        self.model_path = json.load(open('settings.json', 'r'))['model_path']
+        self.path_data = preference['model']['_path_data'] # путь до данных для модели
+        self.path_selected_feature = preference['model']['_path_selected_feature'] # путь до файла настроек модели
+        self._path = preference['model']['_path'] # путь до модели
     @property
     def path_data_value(self):
         return self.path_data
@@ -91,5 +83,5 @@ class configModel():
         return self.path_selected_feature
 
     @property
-    def model_path_value(self):
-        return self.model_path
+    def _path_value(self):
+        return self._path

@@ -15,6 +15,3 @@ def request_data():
     except Exception as e:
         print(e)
         return 'Error!'
-
-
-

@@ -1,18 +1,22 @@
 {
-  "url": "",
-  "header": "",
-  "params": "",
-  "schedule_period_query": "5",
-  "schedule_type": "daily",
-  "schedule_at_time": "",
-  "schedule_timing": "",
-  "schedule_period_time_type": "minutes",
-  "db_name": "",
-  "host": "",
-  "user": "",
-  "password": "",
-  "path_index": "templates/index.html",
-  "path_data": "model/data_input_prediction/work.csv",
-  "path_selected_features": "model/selected_features.txt",
-  "model_path": "model/classifier.bin"
+  "app": {"_path_index": "templates"},
+  "req": {
+    "_url": "",
+    "_header": "",
+    "_params": ""
+  },
+  "schedule": {
+    "_period_query": "4"
+  },
+  "db": {
+    "_name": "",
+    "_host": "",
+    "_user": "",
+    "_password": ""
+  },
+  "model": {
+    "_path_data": "model/data_input_prediction/work.csv",
+    "_path_selected_features": "model/selected_features.txt",
+    "_path": "model/classifier.bin"
+  }
 }

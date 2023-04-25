@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_restx import Api
 from blueprints.doc.getData import namespace as getData_ns
 from blueprints.doc.setData import namespace as setData_ns
-blueprint = Blueprint('swagger', __name__, url_prefix='/swagger')
+blueprint = Blueprint('swagger', __name__, url_prefix='/doc')
 
 api_extension = Api(
     blueprint,
