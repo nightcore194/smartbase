@@ -10,5 +10,6 @@ numpy
 catboost
 ipywidgets
 requests
-skikit-learn
+scikit-learn
 schedule
+peewee-migrations

@@ -6,12 +6,14 @@ from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 from blueprints.doc import blueprint as doc
 
+# Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
 preference = configJson.configApp()
-app = Flask(__name__, template_folder=preference.path_index_value)
+app = Flask(__name__, template_folder=preference.path_index_value) # в template_folder указываем папку, где будем хранить templates-файлы
 cors = CORS(app)
 data = cacheData.request_data()
 
-# Здесь лучше использовать стандартную библиотеку threading для второстепенного потока обновления данных, но как вариант можно рассмотреть потоки Flask
+# Здесь лучше использовать стандартную библиотеку threading для второстепенного потока обновления данных
+# как вариант можно рассмотреть потоки Celery(насчет Flask ошибка - у фласка есть только свой кривой шедулер)
 schedule_thread = threading.Thread(target=schedule_refresh.runup, daemon=True)
 
 # Документация swagger, доступ к ней по /doc/doc

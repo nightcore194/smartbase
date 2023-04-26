@@ -6,3 +6,7 @@
  cacheData.py request from SmartBase API data.
  Python version - 3.10.11.
  All packages - requirements.txt.
+ For migrations here used peewee-migrations library, to make migration go to directory of this project in shell,
+ then add models to watchlist using this command - "pem add here_file_and_model_name", example "pem add databaseModel.Data".
+ For migrations - 'pem migrate'.
+ For available migrations - 'pem list'

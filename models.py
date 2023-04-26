@@ -10,7 +10,8 @@ class BaseModel(peewee.Model):
 
 # Определяем модель данных(в качестве примера взял базу данных, которую описал в коде ранее)
 class Data(BaseModel):
-    time_of_write = peewee.AutoField(column_name=' time_of_write')
+    id_data = peewee.AutoField(column_name='id_data')
+    time_of_write = peewee.DateTimeField(column_name='time_of_write')
     data_text = peewee.TextField(column_name='data_text', null=True)
     class Meta:
         table_name = 'data'

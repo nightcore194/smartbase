@@ -1,5 +1,7 @@
 {
-  "app": {"_path_index": "templates"},
+  "app": {
+    "_path_index": "templates"
+  },
   "req": {
     "_url": "",
     "_header": "",
@@ -9,10 +11,10 @@
     "_period_query": "4"
   },
   "db": {
-    "_name": "",
-    "_host": "",
-    "_user": "",
-    "_password": ""
+    "_name": "data",
+    "_host": "localhost",
+    "_user": "user",
+    "_password": "password"
   },
   "model": {
     "_path_data": "model/data_input_prediction/work.csv",

@@ -6,7 +6,7 @@ import json
 preference = json.load(open('settings.json', 'r'))
 
 # перегрузочные методы @property - автоматически сгенерированный метод для геттеров/сеттеров/делиттеров, запрос для получения данных делать к этому методу
-
+# в любой строке кфг если возникнет ошибка с \, то заменить \ на \\, почему так возникает - https://sites.pitt.edu/~naraehan/python3/mbb6.html#:~:text=In%20Python%20strings%2C%20the%20backslash,r%22%20is%20a%20carriage%20return.
 # Класс настроек для подключения к api
 class configURL():
     def __init__(self):

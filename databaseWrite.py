@@ -1,8 +1,8 @@
 """
 Запись данных в бд
 """
-import datetime, databaseModel
+import time, models
 def data_write(data):
     # отправка запроса к ранее подлюченной БД
-    dataModel = databaseModel.Data(time_of_write=datetime.datetime.now(), data_text=data)
+    dataModel = models.Data(time_of_write=time.strftime('%Y-%m-%d %H:%M:%S'), data_text=data)
     dataModel.save()
