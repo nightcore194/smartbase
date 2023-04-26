@@ -1,26 +1,17 @@
 """
-Получение данных с api в формате json и запись в БД
+Получение данных с api в формате json
 """
-import json, requests, sqlite3, setupDataBase, datetime
-
-with open('settings.json', 'r') as file:
-    preference = json.load(file)
+import configJson, requests, pandas
+from dataHandlerFacade import data_handler
 
 def request_data():
-    data = requests.get(url=preference['url'], headers=preference['url'], params=preference['params']).json()
-    data_handler(data)
-    return data
-
-def data_handler(data):
-    # here past your data handler method and erase pass
-    data_write(data, datetime.datetime.now())
-
-def data_write(data, time):
-    setupDataBase.setup()
-    conn = sqlite3.connect('cacheData.db')
-    c = conn.cursor()
-    c.execute(f'''
-              INSERT INTO data values({time}{data})
-              ''')
-    conn.commit()
-    conn.close()
+    try:
+        preference = configJson.configURL()
+        data = requests.get(url=preference.url_value, headers=preference.header_value, params=preference.params_value).json()
+        df = pandas.read_json(str(data))
+        df.to_csv('model/data_input_prediction/work.csv', encoding='utf-8', index=False)
+        data_handler()
+        return data
+    except Exception as e:
+        print(e)
+        return 'Error!'
