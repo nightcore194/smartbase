@@ -1,11 +1,21 @@
 {
   "app": {
-    "_path_index": "templates"
+    "_path_index": "web/templates"
   },
   "req": {
-    "_url": "",
-    "_header": "",
-    "_params": ""
+    "_url": "http://smartbase-rc/api/",
+    "_header": {},
+    "_params_login":
+    {
+      "Login": "Студент АШИТ",
+      "Password": "1234",
+      "Remember": false
+    },
+    "_body":
+    {
+      "apiName": "mock-data-eche-siom",
+      "params": {}
+    }
   },
   "schedule": {
     "_period_query": "4"

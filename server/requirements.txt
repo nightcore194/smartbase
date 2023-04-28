@@ -1,0 +1,16 @@
+flask
+peewee
+psycopg2
+flask-cors
+Flask-RESTX
+Werkzeug
+gunicorn
+pandas
+numpy
+catboost
+ipywidgets
+requests
+scikit-learn
+schedule
+peewee-migrations
+playhouse
