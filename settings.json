@@ -1,18 +1,30 @@
 {
-  "app": {"_path_index": "templates"},
+  "app": {
+    "_path_index": "web/templates"
+  },
   "req": {
-    "_url": "",
-    "_header": "",
-    "_params": ""
+    "_url": "http://smartbase-rc/api/",
+    "_header": {},
+    "_params_login":
+    {
+      "Login": "Студент АШИТ",
+      "Password": "1234",
+      "Remember": false
+    },
+    "_body":
+    {
+      "apiName": "mock-data-eche-siom",
+      "params": {}
+    }
   },
   "schedule": {
     "_period_query": "4"
   },
   "db": {
-    "_name": "",
-    "_host": "",
-    "_user": "",
-    "_password": ""
+    "_name": "data",
+    "_host": "localhost",
+    "_user": "user",
+    "_password": "password"
   },
   "model": {
     "_path_data": "model/data_input_prediction/work.csv",
