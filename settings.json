@@ -4,7 +4,7 @@
   },
   "req": {
     "_url": "http://smartbase-rc/api/",
-    "_header": {},
+    "_header": {"AccessToken": ""},
     "_params_login":
     {
       "Login": "Студент АШИТ",
