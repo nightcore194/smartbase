@@ -10,3 +10,4 @@
  then add models to watchlist using this command - "pem add here_file_and_model_name", example "pem add databaseModel.Data".
  For migrations - 'pem migrate'.
  For available migrations - 'pem list'
+ Response example - response.json

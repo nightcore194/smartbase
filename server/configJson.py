@@ -3,7 +3,7 @@
 """
 import json, codecs
 
-preference = json.load(open('./settings.json', 'r'))
+preference = json.load(codecs.open('./settings.json', 'rw', "utf_8_sig"))
 
 # перегрузочные методы @property - автоматически сгенерированный метод для геттеров/сеттеров/делиттеров, запрос для получения данных делать к этому методу
 # в любой строке кфг если возникнет ошибка с \, то заменить \ на \\, почему так возникает - https://sites.pitt.edu/~naraehan/python3/mbb6.html#:~:text=In%20Python%20strings%2C%20the%20backslash,r%22%20is%20a%20carriage%20return.
@@ -23,6 +23,10 @@ class configURL():
     def header_value(self):
         return self.header
 
+    @header_value.setter
+    def header_value(self, key, value):
+        self.header[f'{key}'] = value
+
     @property
     def params_login_value(self):
         return self.params_login
@@ -40,6 +44,9 @@ class configScheduler():
     def schedule_period_query_value(self):
         return self.schedule_period_query
 
+    @schedule_period_query_value.setter
+    def schedule_period_query_value(self, value):
+        self.schedule_period_query = value
 
 # Класс настроек для подключения к БД
 class configDB():

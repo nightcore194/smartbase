@@ -16,7 +16,7 @@ def setup_connection():
                   CREATE TABLE data(
                   id_data INTEGER PRIMARY KEY ASC AUTOINCREMENT,
                   time_of_data timestamp NOT NULL,
-        	      data_text TEXT NOT NULL
+        	      data_text TEXT UNIQUE NOT NULL
         	      )
                   ''')
         c.execute("select * from information_schema.tables where table_name=%s", ('predict',)) # полученние данных о существовании таблицы predict в бд
@@ -25,7 +25,7 @@ def setup_connection():
                           CREATE TABLE predict(
                           id_predict INTEGER PRIMARY KEY ASC AUTOINCREMENT,
                           time_of_predict timestamp NOT NULL,
-                	      predict_data_text TEXT NOT NULL
+                	      predict_data_text TEXT UNIQUE NOT NULL
                 	      )
                           ''')
         db.commit()

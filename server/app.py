@@ -1,13 +1,13 @@
 """
 Основное приложение
 """
-import server.cacheData, server.schedule_refresh, threading, configJson
+import server.cacheData, server.schedule_refresh, threading, server.configJson
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
-from blueprints.doc import blueprint as doc
+from server.blueprints.doc import blueprint as doc
 
 # Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
-preference = configJson.configApp()
+preference = server.configJson.configApp()
 app = Flask(__name__, template_folder=preference.path_index_value) # в template_folder указываем папку, где будем хранить templates-файлы
 cors = CORS(app)
 data = server.cacheData.request_data()
