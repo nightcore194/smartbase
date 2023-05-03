@@ -1,14 +1,14 @@
 <template>
     <div class="flex flex-column h-full">
-        <div class="border flex-grow-1 flex">
-            <TableSIOM :color="'green'" class="flex-grow-1 scroll"></TableSIOM>
-            <TableVK :color="'yellow'" class="flex-grow-1 scroll"></TableVK>
+        <div class="flex-grow-1 flex">
+            <TableSIOM class="flex-grow-1 scroll"></TableSIOM>
+            <TableVK class="flex-grow-1 scroll"></TableVK>
         </div>
-        <div class="border flex-grow-1">
+        <div class="flex-grow-1">
             <UserConfigurate></UserConfigurate>
         </div>
-        <div class="border flex-grow-1">
-            <TabelPrognos :color="'red'"></TabelPrognos>
+        <div class="flex-grow-1 flex">
+            <TabelPrognos class="flex-grow-1 scroll border-round-2xl"></TabelPrognos>
         </div>
     </div>
 </template>

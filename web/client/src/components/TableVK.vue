@@ -1,6 +1,6 @@
 <template>
     <div class="h-full w-full m-1" :style="{ 'background-color': color, 'border': 'solid rgb(122, 122, 122) 1px', 'border-radius': '10px'}">
-        <DataTable :value="products"  tableStyle="min-width: 50rem;" scrollHeight="500px">
+        <DataTable :value="products" tableStyle="min-width: 50rem" scrollHeight="500px">
             <Column field="id" header="№ VK"  sortable="true" header-style="background: #aecfff"></Column>
             <Column field="quantity" header="Date" sortable="true" header-style="background: #aecfff"></Column>
         </DataTable>

@@ -1,10 +1,10 @@
 <template>
-    <div class="h-full w-full m-1" :style="{ 'background-color': color, 'border': 'solid rgb(122, 122, 122) 1px', 'border-radius': '10px' }">
-        <DataTable :value="products" tableStyle="min-width: 50rem" scrollHeight="500px">
+    <div class="h-full w-full m-1" :style="{ 'background-color': color, 'border': 'solid rgb(122, 122, 122) 1px', }">
+        <DataTable :value="products" tableStyle="min-width: 50rem;" scrollHeight="500px">
             <Column field="id" header="№ СИОМ" sortable="true" header-style="background: #aecfff"></Column>
             <Column field="quantity" header="№ ВК" sortable="true" header-style="background: #aecfff"></Column>
             <Column field="image" header="Прогноз класс" sortable="true" header-style="background: #aecfff"></Column>
-            <Column field="name" header="Фаит класс" sortable="true" header-style="background: #aecfff"></Column>
+            <Column field="name" header="Факт класс" sortable="true" header-style="background: #aecfff"></Column>
             <Column field="inventoryStatus" header="Дата производства" sortable="true" header-style="background: #aecfff"></Column>
         </DataTable>
     </div>
@@ -13,6 +13,7 @@
   
 <script  lang="ts">
 import { defineComponent } from 'vue'
+import json from ''
 
 export default defineComponent({
     setup() {

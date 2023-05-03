@@ -2,10 +2,9 @@
     <div class="h-full w-full m-1" :style="{ 'background-color': color, 'marginRight': '10 px', 'border': 'solid rgb(122, 122, 122) 1px', 'border-radius': '10px' }">
         <DataTable :value="products"  tableStyle="min-width: 50rem" scrollHeight="500px">
             <Column field="id" header="№ СИОМ" header-style="background: #aecfff" sortable="true"></Column>
-            <Column field="price" header="Date" header-style="background: #aecfff"></Column>
+            <Column field="price" header="Date" header-style="background: #aecfff" sortable="true"></Column>
         </DataTable>
     </div>
-
 </template>
   
 <script  lang="ts">
