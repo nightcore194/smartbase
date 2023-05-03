@@ -8,8 +8,14 @@ from server.databaseWrite import data_write
 def request_data():
     try:
         preference = server.configJson.configURL() # обьект класса настроек для
-        preference.header_value.setter("AccessToken", requests.post(url=preference.url_value+'login/login', json=preference.params_login_value).json()["Account"]["AccessToken"]) # здесь реализуем авторизацию и получение токена в отдельный dict
-        data = requests.post(url=preference.url_value+'dynamicApi/execute', headers=preference.header_value, json=preference.body_value) # запрос на полученние данных
+        data = requests.post(url=preference.url_value + 'dynamicApi/execute', headers=preference.header_value,
+                             json=preference.body_value)  # запрос на полученние данных
+        if len(data) <= 1:
+            preference.header_value.setter("AccessToken", requests.post(url=preference.url_value + 'login/login',
+                                                                        json=preference.params_login_value).json()[
+                "Account"]["AccessToken"])  # здесь реализуем авторизацию и получение токена в отдельный dict
+            data = requests.post(url=preference.url_value + 'dynamicApi/execute', headers=preference.header_value,
+                                 json=preference.body_value)  # запрос на полученние данных
         data.encoding = 'utf-8' # изменение кодировки
         data = data.json() # получение данных в формате json
         data_temp = data['eche'] # для записи в бд
