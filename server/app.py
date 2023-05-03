@@ -9,6 +9,7 @@ from server.blueprints.doc import blueprint as doc
 # Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
 preference = server.configJson.configApp()
 app = Flask(__name__, template_folder=preference.path_index_value) # в template_folder указываем папку, где будем хранить templates-файлы
+app.config['SQLALCHEMY_DATABASE_URI'] = preference.db_url_value
 cors = CORS(app)
 data = server.cacheData.request_data()
 

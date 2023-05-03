@@ -13,4 +13,5 @@ requests
 scikit-learn
 schedule
 peewee-migrations
-playhouse
+flask_sqlalchemy
+flask_migrate
