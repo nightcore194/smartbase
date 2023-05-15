@@ -1,7 +1,6 @@
 {
   "app": {
-    "_path_index": "web/client",
-    "_db_url": "postgresql+psycopg2:///root:pass@localhost/my_db"
+    "_path_index": "web/client"
   },
   "req": {
     "_url": "http://smartbase-rc/api/",

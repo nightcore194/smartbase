@@ -1,18 +1,23 @@
 """
 Основное приложение
 """
+
 import server.cacheData, server.schedule_refresh, threading, server.configJson
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from flask_cors import CORS, cross_origin
 from server.blueprints.doc import blueprint as doc
+from server.forms import UserLogin
+from server.databaseSetup import setup_connection
+from flask_login import LoginManager, login_required
+
 
 # Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
 preference = server.configJson.configApp()
 app = Flask(__name__, template_folder=preference.path_index_value) # в template_folder указываем папку, где будем хранить templates-файлы
-app.config['SQLALCHEMY_DATABASE_URI'] = preference.db_url_value
 cors = CORS(app)
+login_manager = LoginManager(app)
 data = server.cacheData.request_data()
-
+db = setup_connection()
 # Здесь лучше использовать стандартную библиотеку threading для второстепенного потока обновления данных
 # как вариант можно рассмотреть потоки Celery(насчет Flask ошибка - у фласка есть только свой кривой шедулер)
 schedule_thread = threading.Thread(target=server.schedule_refresh.runup, daemon=True)
@@ -26,6 +31,23 @@ app.register_blueprint(doc)
 @cross_origin()
 def catch_all(path):
     return render_template('index.html')
+
+# Авторизация в системе
+@login_manager.user_loader()
+def load_user(user_id):
+    return UserLogin().fromDB(user_id, db)
+
+@app.route('/login', methods=['post', 'get'])
+@login_required
+def login():
+    if request.method == "POST":
+        user = dbase.getUserByEmail(request.form['email'])
+        if user and check_password_hash(user['psw'], request.form['psw']):
+            userlogin = UserLogin().create(user)
+            login_user(userlogin)
+            return redirect(url_for('index'))
+
+    return render_template("login.html", menu=db.getMenu(), title="Авторизация")
 
 # Запросы к серверу
 @app.route('/getData', methods=['GET'])

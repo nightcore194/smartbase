@@ -15,3 +15,5 @@ schedule
 peewee-migrations
 flask_sqlalchemy
 flask_migrate
+flask_login
+wtforms
