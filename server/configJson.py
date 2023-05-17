@@ -76,14 +76,9 @@ class configDB():
 class configApp():
     def __init__(self):
         self.path_index = preference['app']['_path_index'] # путь к папке, где располагаются html файлы
-        self.db_url = preference['app']['_db_url']# ссылка на подключение к бд
     @property
     def path_index_value(self):
         return self.path_index
-
-    @property
-    def db_url_value(self):
-        return self.db_url
 
 # Класс настроек для подключаемой модели
 class configModel():
