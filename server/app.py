@@ -1,15 +1,16 @@
 """
 Основное приложение
 """
+from werkzeug.security import check_password_hash
 
 import server.cacheData, server.schedule_refresh, threading, server.configJson
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request, url_for
 from flask_cors import CORS, cross_origin
 from server.blueprints.doc import blueprint as doc
-from server.forms import UserLogin
+from server.forms import User
 from server.databaseSetup import setup_connection
-from flask_login import LoginManager, login_required
-
+from flask_login import LoginManager, login_required, login_user
+from models import User
 
 # Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
 preference = server.configJson.configApp()
@@ -35,22 +36,20 @@ def catch_all(path):
 # Авторизация в системе
 @login_manager.user_loader()
 def load_user(user_id):
-    return UserLogin().fromDB(user_id, db)
+    return User().fromDB(user_id, db)
 
-@app.route('/login', methods=['post', 'get'])
-@login_required
+@app.route('/login', methods=['POST'])
 def login():
-    if request.method == "POST":
-        user = dbase.getUserByEmail(request.form['email'])
-        if user and check_password_hash(user['psw'], request.form['psw']):
-            userlogin = UserLogin().create(user)
-            login_user(userlogin)
-            return redirect(url_for('index'))
-
-    return render_template("login.html", menu=db.getMenu(), title="Авторизация")
+    email = request.form.get('username')
+    password = request.form.get('password')
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password, password):
+        return redirect(url_for('login'))
+    return redirect(url_for('/'))
 
 # Запросы к серверу
 @app.route('/getData', methods=['GET'])
+@login_required
 @cross_origin()
 def getData():
     global data
@@ -62,6 +61,7 @@ def getData():
     return response
 
 @app.route('/setData', methods=['POST'])
+@login_required
 @cross_origin()
 def setData():
     global data

@@ -28,10 +28,10 @@ class User(Base):
     id_user = Column(Integer, primary_key=True)
     username = Column(String(64), unique=True)
     password = Column(String(64),  unique=True)
-    def __init__(self, id_data, time_of_data, data_text):
-        self.id_data = id_data
-        self.time_of_data = time_of_data
-        self.data_text = data_text
+    def __init__(self, id_user, username, password):
+        self.id_user = id_user
+        self.username = username
+        self.password = password
 
     def __repr__(self):
         return "<{}:{}>".format(self.id_user, self.username)
