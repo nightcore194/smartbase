@@ -18,7 +18,7 @@ def RawData(Path_to_file):
     Out: объект типа pandas.dataframe [https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html]
     '''
     
-    return pd.read_csv(filepath_or_buffer=Path_to_file)#, index_col=False).drop('Unnamed: 0', axis=1) # , index_col=False)
+    return pd.read_csv(filepath_or_buffer=Path_to_file, sep=';')#, index_col=False).drop('Unnamed: 0', axis=1) # , index_col=False)
 
 
 def PredictionClassification(InsertCombinedDataFrame, selected_features, model_path, need_save=True):
