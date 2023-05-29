@@ -1,16 +1,20 @@
 """
 Основное приложение
 """
-from werkzeug.security import check_password_hash
+
 
 import server.cacheData, server.schedule_refresh, threading, server.configJson
+from server.blueprints.doc import blueprint as doc
+from server.databaseSetup import setup_connection
+from server.models import User, Predict, Used
+from server.databaseWrite import used_write
+
+from werkzeug.security import check_password_hash
+
 from flask import Flask, render_template, redirect, request, url_for
 from flask_cors import CORS, cross_origin
-from server.blueprints.doc import blueprint as doc
-from server.forms import User
-from server.databaseSetup import setup_connection
-from flask_login import LoginManager, login_required, login_user
-from models import User
+from flask_login import LoginManager, login_required
+
 
 # Старт приложения + запрос данных из апи, если это сделать в main, то просто пространство не даст увидеть его в фукциях фласка
 preference = server.configJson.configApp()
@@ -48,7 +52,7 @@ def login():
     return redirect(url_for('/'))
 
 # Запросы к серверу
-@app.route('/getData', methods=['GET'])
+@app.route('/getData', methods=['GET'])# получение общих данных
 @login_required
 @cross_origin()
 def getData():
@@ -60,13 +64,41 @@ def getData():
     )
     return response
 
-@app.route('/setData', methods=['POST'])
+@app.route('/setData', methods=['POST']) # обновление общих данных
 @login_required
 @cross_origin()
 def setData():
     global data
     data = server.cacheData.request_data()
     return 'Success!'
+
+@app.route('/predictData', methods=['POST']) # получение данных, спрогнозированных моделью
+@login_required
+@cross_origin()
+def predictData():
+    data_resp = db.session.query(Predict).fileter(Predict.novk == request.args.get('novk'), Predict.nosiom == request.args.get('nosiom'))
+    response = app.response_class(
+        response=data_resp,
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+@app.route('/usedData', methods=['POST']) # получение данных использованных, спрогнозированных моделью
+@login_required
+@cross_origin()
+def usedData():
+    used = db.session.query(Predict).fileter(Predict.no_siom == request.args.get('nosiom'), Predict.no_vk == request.args.get('novk'))
+    used_write(used.no_vk, used.no_siom, used.match_predict)
+    db.session.query(Predict).fileter(Predict.no_siom == request.args.get('nosiom'),
+                                      Predict.no_vk == request.args.get('novk')).delete() # здесь мы удаляем обьекты, используемые в производстве, из таблицы прогнозов
+    db.session.commit()
+    data_resp = db.session.query(Used).all()
+    response = app.response_class(
+        response=data_resp,
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == '__main__':
     app.run()

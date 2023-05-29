@@ -10,4 +10,4 @@ def data_handler(): # здесь передаем данные, получаем
         df_pred = df_pred.to_json(orient='columns')
         server.databaseWrite.data_write(df_pred)
     except Exception as e:
-        return e
+        print(e)
