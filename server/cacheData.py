@@ -10,7 +10,7 @@ def request_data():
         preference = server.configJson.configURL() # обьект класса настроек для
         data = requests.post(url=preference.url_value + 'dynamicApi/execute', headers=preference.header_value,
                              json=preference.body_value)  # запрос на полученние данных
-        if len(data) <= 1:
+        if data.status_code != 200:
             preference.header_value.setter("AccessToken", requests.post(url=preference.url_value + 'login/login',
                                                                         json=preference.params_login_value).json()[
                 "Account"]["AccessToken"])  # здесь реализуем авторизацию и получение токена в отдельный dict

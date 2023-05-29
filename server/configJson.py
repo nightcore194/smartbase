@@ -3,7 +3,7 @@
 """
 import json, codecs
 
-preference = json.load(codecs.open('./settings.json', 'rw', "utf_8_sig"))
+preference = json.load(codecs.open('./settings.json', 'r', "utf_8_sig"))
 
 # перегрузочные методы @property - автоматически сгенерированный метод для геттеров/сеттеров/делиттеров, запрос для получения данных делать к этому методу
 # в любой строке кфг если возникнет ошибка с \, то заменить \ на \\, почему так возникает - https://sites.pitt.edu/~naraehan/python3/mbb6.html#:~:text=In%20Python%20strings%2C%20the%20backslash,r%22%20is%20a%20carriage%20return.
@@ -76,14 +76,10 @@ class configDB():
 class configApp():
     def __init__(self):
         self.path_index = preference['app']['_path_index'] # путь к папке, где располагаются html файлы
-        self.db_url = preference['app']['_db_url']# ссылка на подключение к бд
     @property
     def path_index_value(self):
         return self.path_index
 
-    @property
-    def db_url_value(self):
-        return self.db_url
 
 # Класс настроек для подключаемой модели
 class configModel():
